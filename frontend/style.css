@@ -1,0 +1,132 @@
+/* frontend/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-color: #F8F9FA;
+    --card-bg-color: #FFFFFF;
+    --input-bg-color: #F1F3F5;
+    --border-color: #DEE2E6;
+    --text-color: #212529;
+    --label-color: #495057;
+    --accent-color: #28a745;
+    --accent-color-hover: #218838;
+    --action-color: #007bff;
+    --action-color-hover: #0056b3;
+    --error-color: #dc3545;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    height: 100vh;
+    overflow: hidden; /* Prevents all scrolling */
+}
+
+/* --- Main Dashboard Layout --- */
+.dashboard-container {
+    display: flex;
+    height: 100%;
+}
+
+.panel {
+    padding: 2rem;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-panel {
+    flex-basis: 450px;
+    flex-shrink: 0;
+    background-color: #fff;
+    border-right: 1px solid var(--border-color);
+}
+
+.list-panel {
+    flex-grow: 1;
+    overflow-y: auto; /* Allow scrolling only in the list panel */
+}
+
+.main-header {
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;
+}
+.main-header .logo { font-size: 2.5rem; }
+.main-header h1 { font-size: 1.5rem; font-weight: 600; }
+.list-panel h2 { margin-top: 0; font-size: 1.5rem; font-weight: 600; }
+
+/* --- Form Styles --- */
+.form-card { overflow-y: auto; padding-right: 1rem; }
+.form-group { margin-bottom: 1rem; }
+label { display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--label-color); }
+input[type="text"], input[type="tel"], textarea {
+    width: 100%; padding: 0.75rem; background-color: var(--input-bg-color);
+    border: 1px solid var(--border-color); border-radius: 6px; font-size: 1rem; box-sizing: border-box;
+}
+textarea { resize: vertical; }
+.submit-btn {
+    width: 100%; padding: 0.85rem; background-color: var(--accent-color); color: white; border: none;
+    border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+}
+.submit-btn:hover:not(:disabled) { background-color: var(--accent-color-hover); }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* --- Table Styles --- */
+.interview-table { width: 100%; border-collapse: collapse; }
+.interview-table th, .interview-table td {
+    padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color);
+}
+.interview-table th { font-weight: 600; color: var(--label-color); }
+.interview-table td .candidate-name { font-weight: 500; }
+.interview-table td .job-position { font-size: 0.9rem; color: var(--label-color); }
+
+/* --- Status & Action Styles --- */
+.status-badge {
+    padding: 0.25rem 0.75rem; border-radius: 1rem; font-weight: 600; font-size: 0.8rem;
+    display: inline-block; text-transform: capitalize;
+}
+.status-badge.pending    { background-color: #ffc107; color: #333; }
+.status-badge.calling    { background-color: #17a2b8; color: white; }
+.status-badge.analyzing  { background-color: #6f42c1; color: white; }
+.status-badge.completed  { background-color: #28a745; color: white; }
+.status-badge.error      { background-color: #dc3545; color: white; }
+
+.action-btn {
+    background: none; border: 1px solid var(--action-color); color: var(--action-color);
+    padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s;
+}
+.action-btn:hover { background-color: var(--action-color); color: white; }
+.action-btn:disabled { border-color: #ccc; color: #ccc; cursor: not-allowed; }
+.action-btn:disabled:hover { background: none; }
+.action-btn.report-btn { border-color: var(--accent-color); color: var(--accent-color); }
+.action-btn.report-btn:hover { background-color: var(--accent-color); color: white; }
+.timer { font-weight: 500; color: var(--action-color); }
+
+/* --- Utility & Other Styles --- */
+.hidden { display: none !important; }
+.error-text { color: var(--error-color); margin-top: 1rem; text-align: center; }
+.loader { width: 18px; height: 18px; border: 2px solid rgba(255, 255, 255, 0.3); border-top-color: #ffffff;
+    border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+#empty-state { text-align: center; padding: 3rem; color: #6c757d; }
+
+/* --- Modal Styles --- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center;
+}
+.modal-content {
+    background: white; padding: 2rem; border-radius: 8px; width: 90%; max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative;
+}
+.modal-close {
+    position: absolute; top: 1rem; right: 1rem; background: none; border: none;
+    font-size: 1.5rem; cursor: pointer;
+}
+#modal-body h4 { margin-top: 1.5rem; margin-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;}
+#modal-body p { white-space: pre-wrap; line-height: 1.6; }
+#modal-body audio { width: 100%; margin-top: 1rem; }

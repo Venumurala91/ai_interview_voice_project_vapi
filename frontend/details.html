@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Details | Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <span class="logo">🤖</span>
+            <h1>Voice AI Screening Dashboard</h1>
+        </header>
+
+        <main class="details-card">
+            <h2>Interview Details for <span id="candidate-name-title">...</span></h2>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <h3>Status</h3>
+                    <p><span id="status" class="pending">Loading...</span></p>
+                </div>
+                <div class="detail-item">
+                    <h3>Action</h3>
+                    <button class="submit-btn" id="call-btn" disabled>
+                        <span id="call-btn-text">📞 Start AI Interview Call</span>
+                        <div class="loader hidden" id="call-loader"></div>
+                    </button>
+                </div>
+                <div class="detail-item">
+                    <h3>Job Position</h3>
+                    <p id="job-position">Loading...</p>
+                </div>
+                <div class="detail-item">
+                    <h3>Skills Assessed</h3>
+                    <p id="skills">Loading...</p>
+                </div>
+            </div>
+
+            <div id="results-section" class="hidden">
+                <hr style="margin: 2rem 0; border-color: var(--border-color);">
+                <h2>Results & Analysis</h2>
+                <div class="details-grid">
+                     <div class="detail-item">
+                        <h3>Duration</h3>
+                        <p id="duration">--</p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Recording</h3>
+                        <div id="recording-player-container">
+                           <p>No recording available.</p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="detail-item" style="margin-top: 1.5rem;">
+                    <h3>Assessment</h3>
+                    <p id="assessment">--</p>
+                </div>
+                <div class="details-grid" style="margin-top: 1.5rem;">
+                     <div class="detail-item">
+                        <h3>Strengths</h3>
+                        <p id="strengths">--</p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Concerns / Follow-up</h3>
+                        <p id="concerns">--</p>
+                    </div>
+                </div>
+                 <div class="details-grid" style="margin-top: 1.5rem;">
+                    <div class="detail-item score-box">
+                        <h3>Overall Score</h3>
+                        <p id="score-value">--</p>
+                    </div>
+                     <div class="detail-item score-box">
+                        <h3>Hiring Recommendation</h3>
+                        <p id="recommendation">--</p>
+                    </div>
+                 </div>
+            </div>
+            
+        </main>
+    </div>
+    <!-- The interview ID is passed from Flask/Jinja2 -->
+    <!-- <script>
+        const INTERVIEW_ID = {{ interview_id }};
+    </script> -->
+    <script src="{{ url_for('static', filename='details.js') }}"></script>
+</body>
+</html>

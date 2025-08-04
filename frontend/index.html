@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice AI Screening Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- LEFT PANEL: CREATE INTERVIEW -->
+        <div class="panel form-panel">
+            <header class="main-header">
+                <span class="logo">🤖</span>
+                <h1>AI Screening Dashboard</h1>
+            </header>
+            <div class="form-card">
+                <h2>Create a New AI Interview</h2>
+                <form id="create-interview-form">
+                    <div class="form-group">
+                        <label for="candidate_name">Candidate Name</label>
+                        <input type="text" id="candidate_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Candidate Phone Number</label>
+                        <input type="tel" id="phone_number" required placeholder="+12223334444">
+                    </div>
+                    <div class="form-group">
+                        <label for="job_position">Job Position</label>
+                        <input type="text" id="job_position" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="job_description">Full Job Description</label>
+                        <textarea id="job_description" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="skills_to_assess">Skills to Assess (comma-separated)</label>
+                        <input type="text" id="skills_to_assess" placeholder="e.g., Python, AWS">
+                    </div>
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <span id="btn-text">Create Interview</span>
+                        <div class="loader hidden" id="loader"></div>
+                    </button>
+                    <p id="error-message" class="error-text hidden"></p>
+                </form>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: INTERVIEW LIST -->
+        <div class="panel list-panel">
+            <h2>Interview Pipeline</h2>
+            <div class="interview-list-container">
+                <table class="interview-table">
+                    <thead>
+                        <tr>
+                            <th>Candidate</th>
+                            <th>Job Position</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="interview-list-body">
+                        <!-- Rows will be dynamically inserted here by dashboard.js -->
+                    </tbody>
+                </table>
+                 <div id="empty-state" class="hidden">
+                    <p>No interviews created yet. Use the form on the left to add one.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FOR VIEWING DETAILS -->
+    <div id="details-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn">×</button>
+            <h3>Interview Report for <span id="modal-candidate-name"></span></h3>
+            <div id="modal-body">
+                <!-- Details will be injected here -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>
